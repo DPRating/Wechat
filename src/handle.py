@@ -30,7 +30,7 @@ class Handle(object):
             # Write to log
             recMsg = receive.parse_xml(webData)
             if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
-                if recMsg.Content in ['大炮30', '大炮综指']：
+                if recMsg.Content in ['大炮30', '大炮综指']:
                     toUser = recMsg.FromUserName
                     fromUser = recMsg.ToUserName
                     content = GetIndexValue()
