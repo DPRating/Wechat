@@ -1,7 +1,7 @@
-
-
 # -*- coding: utf-8 -*-
 # filename: receive.py
+
+
 import xml.etree.ElementTree as ET
 
 
