@@ -8,7 +8,7 @@ import receive
 import reply
 import hashlib
 import pandas as pd
-from log import GetParentDir
+from initialize import GetParentDir
 
 
 class Handle(object):
