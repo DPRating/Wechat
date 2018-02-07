@@ -58,7 +58,7 @@ def LaunchIndexProgram():
     parentDir = GetParentDir()
     refPath = os.path.join(parentDir, 'ref', 'params.csv')
     indexCodePath = pd.read_csv(refPath).set_index('key')['value']['indexCodePath']
-    os.system('python ', indexCodePath)
+    os.system('python ' + indexCodePath)
     
     
 def Initialize():
