@@ -44,7 +44,7 @@ def RegisterIndex():
     df = pd.read_csv(indexPath)
     indexValue = df['index'][len(df)-1]
     indexTime = df['timestamp'][len(df)-1]
-    print ('Index value is '+str(index)+' at '+str(timestamp))
+    print ('Index value is '+str(indexValue)+' at '+str(indexTime))
     
     keys = ['indexValue', 'indexTime']
     values = [indexValue, indexTime]
