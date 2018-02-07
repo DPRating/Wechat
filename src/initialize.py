@@ -24,6 +24,17 @@ def CreateRecord(keys, values, dir, file):
     df.to_csv(os.path.join(dir,file), index=False)
     print(file+' created')
 
+    
+def AppendRecord(keys, values, dir, file, reqPrint=False):
+    df = {keys[0]:[values[0]]}
+    for i in range(1,len(keys)):
+        df[keys[i]] = [values[i]]
+    df = pd.DataFrame(df)
+    df = df[keys]
+    df.to_csv(os.path.join(dir,file), mode='a', header=False, index=False)
+    if reqPrint:
+        print(file+' updated')
+
 
 def CreateLog():
     dir = os.path.join(GetParentDir(), 'log')
@@ -37,17 +48,25 @@ def CreateLog():
         keys = ['timestamp', 'datetime', 'record']
         values = [ts, readableTime, record]
         CreateRecord(keys, values, dir, file)
+        RegisterIndex()
 
         
-def GetIndex():
+def RegisterIndex():
     parentDir = GetParentDir()
-    path = os.path.join(parentDir, 'ref', 'params.csv')
-    path = pd.read_csv(path).set_index('key')['value']['indexPath']
-    df = pd.read_csv(path)
-    index = df['index'][len(df)-1]
-    timestamp = df['timestamp'][len(df)-1]
+    refPath = os.path.join(parentDir, 'ref', 'params.csv')
+    indexPath = pd.read_csv(refPath).set_index('key')['value']['indexPath']
+    df = pd.read_csv(indexPath)
+    indexValue = df['index'][len(df)-1]
+    indexTime = df['timestamp'][len(df)-1]
     print ('Index value is '+str(index)+' at '+str(timestamp))
-    return index, timestamp
+    
+    keys = ['indexValue', 'indexTime']
+    values = [indexValue, indexTime]
+    dir = os.path.dirname(refPath)
+    file = 'params.csv'
+    AppendRecord(keys, values, dir, file)
+    
+    
 
 
 
