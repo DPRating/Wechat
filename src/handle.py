@@ -9,6 +9,7 @@ import reply
 import hashlib
 import pandas as pd
 from initialize import GetParentDir
+from indexhub import GetIndexValue
 
 
 class Handle(object):
@@ -28,11 +29,15 @@ class Handle(object):
             # Write to log
             recMsg = receive.parse_xml(webData)
             if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
-                toUser = recMsg.FromUserName
-                fromUser = recMsg.ToUserName
-                content = "test"
-                replyMsg = reply.TextMsg(toUser, fromUser, content)
-                return replyMsg.send()
+                if recMsg.Content in ['大炮30', '大炮综指']：
+                    toUser = recMsg.FromUserName
+                    fromUser = recMsg.ToUserName
+                    content = GetIndexValue()
+                    replyMsg = reply.TextMsg(toUser, fromUser, content)
+                    return replyMsg.send()
+                else:
+                    print "bypass"
+                    return "success"
             else:
                 print "bypass"
                 return "success"
