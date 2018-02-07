@@ -1,5 +1,6 @@
 
 
+# -*- coding: utf-8 -*-
 # filename: indexhub.py
 import os
 import time
