@@ -1,6 +1,6 @@
 
 
-# filename: log.py
+# filename: initialize.py
 import os
 import sys
 import time
@@ -37,6 +37,17 @@ def CreateLog():
         keys = ['timestamp', 'datetime', 'record']
         values = [ts, readableTime, record]
         CreateRecord(keys, values, dir, file)
+
+        
+def GetIndex():
+    parentDir = GetParentDir()
+    path = os.path.join(parentDir, 'ref', 'params.csv')
+    path = pd.read_csv(path).set_index('key')['value']['indexPath']
+    df = pd.read_csv(path)
+    index = df['index'][len(df)-1]
+    timestamp = df['timestamp'][len(df)-1]
+    print ('Index value is '+str(index)+' at '+str(timestamp))
+    return index, timestamp
 
 
 
