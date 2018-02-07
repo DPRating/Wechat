@@ -4,15 +4,30 @@
 import os
 import sys
 import web
+import receive
+import reply
 import hashlib
 import pandas as pd
 
 
 class Handle(object):
-
-    def getParentDir(self):
-        path = os.path.dirname(os.path.realpath(sys.argv[0]))
-        return os.path.dirname(path)
+    def POST(self):
+        try:
+            webData = web.data()
+            print "Handle Post webdata is ", webData
+            # Write to log
+            recMsg = receive.parse_xml(webData)
+            if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
+                toUser = recMsg.FromUserName
+                fromUser = recMsg.ToUserName
+                content = "test"
+                replyMsg = reply.TextMsg(toUser, fromUser, content)
+                return replyMsg.send()
+            else:
+                print "bypass"
+                return "success"
+        except Exception, Argument:
+            return Argument
 
     def GET(self):
         try:
@@ -40,3 +55,7 @@ class Handle(object):
                 return ""
         except Exception, Argument:
             return Argument
+
+    def getParentDir(self):
+        path = os.path.dirname(os.path.realpath(sys.argv[0]))
+        return os.path.dirname(path)
