@@ -29,6 +29,7 @@ class TextMsg(Msg):
     def __init__(self, xmlData):
         Msg.__init__(self, xmlData)
         self.Content = xmlData.find('Content').text.encode("utf-8")
+        print self.Content
 
 
 class ImageMsg(Msg):
