@@ -19,7 +19,7 @@ class Handle(object):
         df = pd.read_csv(path)
         self.index = df['index'][len(df)-1]
         self.datetime = df['datetime'][len(df)-1]
-        print('Index value is '+str(self.index)+' at '+str(self.datetime))
+        print ('Index value is '+str(self.index)+' at '+str(self.datetime))
 
     def POST(self):
         try:
