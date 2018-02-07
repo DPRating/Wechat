@@ -8,9 +8,19 @@ import receive
 import reply
 import hashlib
 import pandas as pd
+from log import GetParentDir
 
 
 class Handle(object):
+    def __init__(self):
+        parentDir = GetParentDir()
+        path = os.path.join(parentDir, 'ref', 'params.csv')
+        path = pd.read_csv(path).set_index('key')['value']['indexPath']
+        df = pd.read_csv(path)
+        self.index = df['index'][len(df)-1]
+        self.datetime = df['datetime'][len(df)-1]
+        print('Index value is '+str(self.index)+' at '+str(self.datetime))
+
     def POST(self):
         try:
             webData = web.data()
