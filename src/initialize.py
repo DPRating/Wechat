@@ -12,7 +12,7 @@ def GetParentDir():
     return os.path.dirname(path)
 
 
-def CreateRecord(keys, values, dir, file):
+def CreateRecord(keys, values, dir, file, reqPrint=False):
     df = {keys[0]:[values[0]]}
     for i in range(1,len(keys)):
         df[keys[i]] = [values[i]]
@@ -22,7 +22,8 @@ def CreateRecord(keys, values, dir, file):
     if not os.path.exists(dir):
         os.mkdir(dir)
     df.to_csv(os.path.join(dir,file), index=False)
-    print(file+' created')
+    if reqPrint:
+        print(file+' created')
 
     
 def AppendRecord(keys, values, dir, file, reqPrint=False):
@@ -34,22 +35,7 @@ def AppendRecord(keys, values, dir, file, reqPrint=False):
     df.to_csv(os.path.join(dir,file), mode='a', header=False, index=False)
     if reqPrint:
         print(file+' updated')
-
-
-def CreateLog():
-    dir = os.path.join(GetParentDir(), 'log')
-    file = 'log.csv'
-    if os.path.exists(os.path.join(dir,file)):
-        print(file + ' already exists')
-    else:
-        ts = int(time.time())
-        readableTime = time.strftime('%Y-%m-%d_%H:%M:%S', time.localtime(ts))
-        record = 'Log.csv created'
-        keys = ['timestamp', 'datetime', 'record']
-        values = [ts, readableTime, record]
-        CreateRecord(keys, values, dir, file)
-        RegisterIndex()
-
+        
         
 def RegisterIndex():
     parentDir = GetParentDir()
@@ -64,10 +50,22 @@ def RegisterIndex():
     values = [indexValue, indexTime]
     dir = os.path.dirname(refPath)
     file = 'params.csv'
-    AppendRecord(keys, values, dir, file)
+    AppendRecord(keys, values, dir, file, reqPrint=True)
     
     
-
+def Initialize():
+    dir = os.path.join(GetParentDir(), 'log')
+    file = 'log.csv'
+    if os.path.exists(os.path.join(dir,file)):
+        print(file + ' already exists')
+    else:
+        ts = int(time.time())
+        readableTime = time.strftime('%Y-%m-%d_%H:%M:%S', time.localtime(ts))
+        record = 'Log.csv created'
+        keys = ['timestamp', 'datetime', 'record']
+        values = [ts, readableTime, record]
+        CreateRecord(keys, values, dir, file, reqPrint=True)
+        RegisterIndex()
 
 
 
