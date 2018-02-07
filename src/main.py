@@ -1,7 +1,7 @@
-
-
 # -*- coding: utf-8 -*-
 # filename: main.py
+
+
 import web
 from handle import Handle
 from initialize import Initialize
