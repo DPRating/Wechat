@@ -1,5 +1,6 @@
 
 
+# -*- coding: utf-8 -*-
 # filename: handle.py
 import os
 import sys
