@@ -24,22 +24,16 @@ class Handle(object):
         print ('Index value is '+str(self.index)+' at '+str(self.datetime))
 
     def POST(self):
-        print "Get POST request"
         try:
             webData = web.data()
-            # print "Handle Post webdata is ", webData
-            # Write to log
             recMsg = receive.parse_xml(webData)
             if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
                 if recMsg.Content in ['大炮30', '大炮综指']:
                     toUser = recMsg.FromUserName
                     fromUser = recMsg.ToUserName
-                    print "before get index value"
                     content = str(GetIndexValue())
-                    print "after get index value"
                     replyMsg = reply.TextMsg(toUser, fromUser, content)
                     return replyMsg.send()
-                    print "Reply success"
                 else:
                     print "bypass"
                     return "success"
