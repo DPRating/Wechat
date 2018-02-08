@@ -43,7 +43,7 @@ def RegisterIndex():
     refPath = os.path.join(parentDir, 'ref', 'params.csv')
     indexPath = pd.read_csv(refPath).set_index('key')['value']['indexPath']
     df = pd.read_csv(indexPath)
-    indexValue = int(df['index'][len(df)-1]*100)/100
+    indexValue = round(df['index'][len(df)-1], 2)
     indexTime = df['timestamp'][len(df)-1]
     print ('Index value is '+str(indexValue)+' at '+str(indexTime))
     
