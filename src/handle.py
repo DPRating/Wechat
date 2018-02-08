@@ -34,6 +34,7 @@ class Handle(object):
                 if recMsg.Content in ['大炮30', '大炮综指']:
                     toUser = recMsg.FromUserName
                     fromUser = recMsg.ToUserName
+                    print "Prepare to get index"
                     content = GetIndexValue()
                     print ("Index value is " + str(content))
                     replyMsg = reply.TextMsg(toUser, fromUser, content)
