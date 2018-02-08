@@ -27,7 +27,7 @@ class Handle(object):
         print "Get POST request"
         try:
             webData = web.data()
-            print "Handle Post webdata is ", webData
+            # print "Handle Post webdata is ", webData
             # Write to log
             recMsg = receive.parse_xml(webData)
             if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
