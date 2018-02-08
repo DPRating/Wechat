@@ -15,7 +15,8 @@ def GetIndexValue():
     print df
     timediff = int(time.time())-int(df['value']['indexTime'])
     print df['value']['indexCodePath']
-    if timediff>1000000:
+    '''
+    if timediff>3600:
         # os.system('python ' + df['value']['indexCodePath'])
         print 'back to GetIndexValue'
         indexPath = pd.read_csv(df['value']['indexPath'])
@@ -32,6 +33,8 @@ def GetIndexValue():
         df.to_csv(refPath)
     else:
         indexValue = df['value']['indexValue']
+    '''
+    indexValue = df['value']['indexValue']
     print "after index calc"
     return indexValue
     
