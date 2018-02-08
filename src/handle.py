@@ -35,8 +35,10 @@ class Handle(object):
                     toUser = recMsg.FromUserName
                     fromUser = recMsg.ToUserName
                     content = GetIndexValue()
+                    print ("Index value is " + str(content))
                     replyMsg = reply.TextMsg(toUser, fromUser, content)
                     return replyMsg.send()
+                    print "Reply success"
                 else:
                     print "bypass"
                     return "success"
