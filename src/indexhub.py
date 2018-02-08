@@ -9,6 +9,7 @@ from initialize import GetParentDir
 
 
 def GetIndexValue():
+    print "entered GetIndexValue"
     refPath = os.path.join(GetParentDir(), 'ref', 'params.csv')
     df = pd.read_csv(refPath).set_index('key')
     timediff = int(time.time())-int(df['value']['indexTime'])
