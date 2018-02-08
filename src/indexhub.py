@@ -12,6 +12,7 @@ def GetIndexValue():
     refPath = os.path.join(GetParentDir(), 'ref', 'params.csv')
     df = pd.read_csv(refPath).set_index('key')
     timediff = int(time.time())-int(df['value']['indexTime'])
+    '''
     if timediff>3600:
         indexPath = pd.read_csv(df['value']['indexPath'])
         dfindex = pd.read_csv(indexPath)
@@ -22,6 +23,8 @@ def GetIndexValue():
         df.to_csv(refPath)
     else:
         indexValue = df['value']['indexValue']
+    '''
+    indexValue = df['value']['indexValue']
     return indexValue
     
     
