@@ -9,11 +9,11 @@ from initialize import GetParentDir
 
 
 def GetIndexValue():
-    print "entered GetIndexValue"
     refPath = os.path.join(GetParentDir(), 'ref', 'params.csv')
+    print refPath
     df = pd.read_csv(refPath).set_index('key')
     timediff = int(time.time())-int(df['value']['indexTime'])
-    print "before index calc"
+    print df['value']['indexCodePath']
     if timediff>1:
         os.system('python ' + df['value']['indexCodePath'])
         indexPath = pd.read_csv(df['value']['indexPath'])
