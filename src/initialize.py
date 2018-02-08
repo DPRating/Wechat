@@ -47,13 +47,15 @@ def RegisterIndex():
     indexTime = df['timestamp'][len(df)-1]
     print ('Index value is '+str(indexValue)+' at '+str(indexTime))
     
-    keys = ['indexValue', 'indexTime']
-    values = [indexValue, indexTime]
     dir = os.path.dirname(refPath)
     file = 'params.csv'
+    keys = ['key', 'value']
+    values = ['indexTime', indexTime]
     AppendRecord(keys, values, dir, file, reqPrint=True)
-
+    values = ['indexValue', indexValue]
+    AppendRecord(keys, values, dir, file, reqPrint=True)
     
+
 def LaunchIndexProgram():
     parentDir = GetParentDir()
     refPath = os.path.join(parentDir, 'ref', 'params.csv')
