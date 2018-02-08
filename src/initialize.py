@@ -74,7 +74,7 @@ def Initialize():
         values = [ts, readableTime, record]
         CreateRecord(keys, values, dir, file, reqPrint=True)
         RegisterIndex()
-        LaunchIndexProgram()
+        # LaunchIndexProgram()
 
 
 
