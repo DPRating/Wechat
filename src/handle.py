@@ -24,6 +24,7 @@ class Handle(object):
         print ('Index value is '+str(self.index)+' at '+str(self.datetime))
 
     def POST(self):
+        print "Get POST request"
         try:
             webData = web.data()
             print "Handle Post webdata is ", webData
