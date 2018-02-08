@@ -19,8 +19,9 @@ def GetIndexValue():
         os.system('python ' + df['value']['indexCodePath'])
         indexPath = pd.read_csv(df['value']['indexPath'])
         dfindex = pd.read_csv(indexPath)
+        print dfindex
         indexTime = dfindex['timestamp'][len(dfindex)-1]
-        indexValue = int(dfindex['index'][len(dfindex)-1]*100)/100
+        indexValue = round(dfindex['index'][len(dfindex)-1], 2)
         df['value']['indexTime'] = indexTime
         df['value']['indexValue'] = indexValue
         print df
