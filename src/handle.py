@@ -35,7 +35,7 @@ class Handle(object):
                     toUser = recMsg.FromUserName
                     fromUser = recMsg.ToUserName
                     print "Prepare to get index"
-                    content = GetIndexValue()
+                    content = str(78.78)
                     print ("Index value is " + str(content))
                     replyMsg = reply.TextMsg(toUser, fromUser, content)
                     return replyMsg.send()
