@@ -16,9 +16,10 @@ def GetIndexValue():
     timediff = int(time.time())-int(df['value']['indexTime'])
     print df['value']['indexCodePath']
     if timediff>1:
-        os.system('python ' + df['value']['indexCodePath'])
+        # os.system('python ' + df['value']['indexCodePath'])
         print 'back to GetIndexValue'
         indexPath = pd.read_csv(df['value']['indexPath'])
+        print indexPath
         dfindex = pd.read_csv(indexPath)
         print dfindex
         indexTime = dfindex['timestamp'][len(dfindex)-1]
