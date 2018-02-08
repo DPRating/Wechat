@@ -36,6 +36,7 @@ class Handle(object):
                     fromUser = recMsg.ToUserName
                     print "before get index value"
                     content = str(GetIndexValue())
+                    print "after get index value"
                     replyMsg = reply.TextMsg(toUser, fromUser, content)
                     return replyMsg.send()
                     print "Reply success"
