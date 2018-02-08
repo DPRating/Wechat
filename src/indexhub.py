@@ -26,8 +26,7 @@ def GetIndexValue():
     else:
         indexValue = df['value']['indexValue']
     '''
-    print df['value']['indexValue']
-    indexValue = round(df['value']['indexValue'], 2)
+    indexValue = round(float(df['value']['indexValue']), 2)
     print indexValue
     return indexValue
     
