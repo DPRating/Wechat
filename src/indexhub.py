@@ -12,6 +12,7 @@ def GetIndexValue():
     refPath = os.path.join(GetParentDir(), 'ref', 'params.csv')
     print refPath
     df = pd.read_csv(refPath).set_index('key')
+    print df
     timediff = int(time.time())-int(df['value']['indexTime'])
     print df['value']['indexCodePath']
     if timediff>1:
