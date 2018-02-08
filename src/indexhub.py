@@ -11,9 +11,9 @@ from initialize import GetParentDir
 def GetIndexValue():
     refPath = os.path.join(GetParentDir(), 'ref', 'params.csv')
     df = pd.read_csv(refPath).set_index('key')
-    timediff = int(time.time())-int(df['value']['indexTime'])
     '''
     # The logic below has been tranferred to Dapao30 code
+    timediff = int(time.time())-int(df['value']['indexTime'])
     if timediff>3600:
         os.system('python ' + df['value']['indexCodePath'])
         indexPath = pd.read_csv(df['value']['indexPath'])
@@ -26,7 +26,9 @@ def GetIndexValue():
     else:
         indexValue = df['value']['indexValue']
     '''
+    print df['value']['indexValue']
     indexValue = round(df['value']['indexValue'], 2)
+    print indexValue
     return indexValue
     
     
