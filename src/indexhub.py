@@ -23,7 +23,9 @@ def GetIndexValue():
         dfindex = pd.read_csv(indexPath)
         print dfindex
         indexTime = dfindex['timestamp'][len(dfindex)-1]
+        print indexTime
         indexValue = round(dfindex['index'][len(dfindex)-1], 2)
+        print indexValue
         df['value']['indexTime'] = indexTime
         df['value']['indexValue'] = indexValue
         print df
