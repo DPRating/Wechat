@@ -22,6 +22,7 @@ def GetIndexValue():
         indexValue = int(dfindex['index'][len(dfindex)-1]*100)/100
         df['value']['indexTime'] = indexTime
         df['value']['indexValue'] = indexValue
+        print df
         df.to_csv(refPath)
     else:
         indexValue = df['value']['indexValue']
