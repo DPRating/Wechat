@@ -22,3 +22,4 @@ def GetDapao30():
     with open(paramPath) as f:
         param = json.load(f)
     return param['dapao30Value']
+
