@@ -45,17 +45,15 @@ class Handle(object):
                 fromUser = recMsg.ToUserName
                 if recMsg.Content in ['大炮30', '大炮综指']:
                     str1 = u'当前指数：'.encode('utf-8') + str(GetDapao30Value())
-                    str2 = u'\n大炮综指是由市值前30的数字货币按市值加权得到的指数，可以反映出市场整体行情，想进一步了解可回复「大炮综指详情」'.encode('utf-8')
-                    content = str1 + str2
-                    replyMsg = reply.TextMsg(toUser, fromUser, content)
-                    return replyMsg.send()
+                    str2 = u'\n大炮综指是由市值前30的数字货币按市值加权得到的指数，'.encode('utf-8')
+                    str3 = u'可以反映出市场整体行情，想进一步了解可回复「大炮综指详情」'.encode('utf-8')
+                    content = str1 + str2 + str3
                 elif recMsg.Content in ['大炮30详情', '大炮综指详情']:
                     content = str(GetDapao30Doc())
-                    replyMsg = reply.TextMsg(toUser, fromUser, content)
-                    return replyMsg.send()
                 else:
-                    print "bypass"
-                    return "success"
+                    content = ''
+                replyMsg = reply.TextMsg(toUser, fromUser, content)
+                return replyMsg.send()
             else:
                 print "bypass"
                 return "success"
