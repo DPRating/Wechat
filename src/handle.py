@@ -42,11 +42,9 @@ class Handle(object):
             recMsg = receive.parse_xml(webData)
             if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
                 if recMsg.Content in ['大炮30', '大炮综指']:
-                    print('Recognized')
                     toUser = recMsg.FromUserName
                     fromUser = recMsg.ToUserName
-                    print(GetDapao30())
-                    content = GetDapao30()
+                    content = GetDapao30() + '\n回复「大炮综指详情」可获取相关文章'
                     replyMsg = reply.TextMsg(toUser, fromUser, content)
                     return replyMsg.send()
                 else:
