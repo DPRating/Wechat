@@ -10,3 +10,9 @@ def GetParentDir():
     path = os.path.dirname(os.path.realpath(sys.argv[0]))
     return os.path.dirname(path)
     
+
+def GetDapao30():
+    paramPath = os.path.join(GetParentDir, 'ref', 'param.json')
+    with open(paramPath) as f:
+        param = json.load(f)
+    return param['dapao30Value']
