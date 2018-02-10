@@ -9,39 +9,11 @@ import receive
 import reply
 import hashlib
 import pandas as pd
-from function import GetDapao30
+from function import GetToken, GetDapao30
 
 
 class Handle(object):
-    def __init__(self):
-        parentDir = GetParentDir()
-        path = os.path.join(parentDir, 'ref', 'params.csv')
-        path = pd.read_csv(path).set_index('key')['value']['indexPath']
-        df = pd.read_csv(path)
-        self.index = df['index'][len(df)-1]
-        self.datetime = df['datetime'][len(df)-1]
-        print ('Index value is '+str(self.index)+' at '+str(self.datetime))
-
-    def POST(self):
-        try:
-            webData = web.data()
-            recMsg = receive.parse_xml(webData)
-            if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
-                if recMsg.Content in ['大炮30', '大炮综指']:
-                    toUser = recMsg.FromUserName
-                    fromUser = recMsg.ToUserName
-                    content = str(GetIndexValue())
-                    replyMsg = reply.TextMsg(toUser, fromUser, content)
-                    return replyMsg.send()
-                else:
-                    print "bypass"
-                    return "success"
-            else:
-                print "bypass"
-                return "success"
-        except Exception, Argument:
-            return Argument
-
+    
     def GET(self):
         try:
             data = web.input()
@@ -51,11 +23,7 @@ class Handle(object):
             timestamp = data.timestamp
             nonce = data.nonce
             echostr = data.echostr
-
-            parentDir = self.getParentDir()
-            path = os.path.join(parentDir, 'ref', 'params.csv')
-            token = pd.read_csv(path).set_index('key')['value']['token']
-
+            token = GetToken()
             list = [token, timestamp, nonce]
             list.sort()
             sha1 = hashlib.sha1()
@@ -69,6 +37,25 @@ class Handle(object):
         except Exception, Argument:
             return Argument
 
-    def getParentDir(self):
-        path = os.path.dirname(os.path.realpath(sys.argv[0]))
-        return os.path.dirname(path)
+    def POST(self):
+        try:
+            webData = web.data()
+            recMsg = receive.parse_xml(webData)
+            if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
+                if recMsg.Content in ['大炮30', '大炮综指']:
+                    toUser = recMsg.FromUserName
+                    fromUser = recMsg.ToUserName
+                    content = GetDapao30()
+                    replyMsg = reply.TextMsg(toUser, fromUser, content)
+                    return replyMsg.send()
+                else:
+                    print "bypass"
+                    return "success"
+            else:
+                print "bypass"
+                return "success"
+        except Exception, Argument:
+            return Argument
+
+
+
