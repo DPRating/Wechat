@@ -46,9 +46,14 @@ class Handle(object):
                     fromUser = recMsg.ToUserName
                     i = GetDapao30()
                     print(i)
+                    print(type(i))
                     s = u' 回复 大炮综指详情 可获取相关文章'.encode('utf-8')
                     print(s)
-                    content = i + s
+                    print(type(s))
+                    x = i+s
+                    print(x)
+                    print(type(x))
+                    content = x
                     replyMsg = reply.TextMsg(toUser, fromUser, content)
                     return replyMsg.send()
                 else:
