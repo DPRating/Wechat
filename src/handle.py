@@ -44,7 +44,7 @@ class Handle(object):
                 if recMsg.Content in ['大炮30', '大炮综指']:
                     toUser = recMsg.FromUserName
                     fromUser = recMsg.ToUserName
-                    suffix = u'\n回复「大炮综指详情」可获取相关文章'.encode('utf-8')
+                    suffix = u'\n回复「大炮综指详情」\n可获取相关文章'.encode('utf-8')
                     content = str(GetDapao30()) + suffix
                     replyMsg = reply.TextMsg(toUser, fromUser, content)
                     return replyMsg.send()
