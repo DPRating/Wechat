@@ -9,8 +9,7 @@ import receive
 import reply
 import hashlib
 import pandas as pd
-from initialize import GetParentDir
-from indexhub import GetIndexValue
+from function import GetDapao30
 
 
 class Handle(object):
