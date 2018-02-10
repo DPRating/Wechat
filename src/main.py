@@ -9,6 +9,7 @@ import json
 import time
 import pandas as pd
 from handle import Handle
+from initialize import Initialize
 
 urls = (
     '/', 'Handle',
