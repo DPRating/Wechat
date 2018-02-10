@@ -3,64 +3,32 @@
 
 
 import os
-import sys
 import time
 import pandas as pd
+from function import GetParentDir
 
 
-def GetParentDir():
-    path = os.path.dirname(os.path.realpath(sys.argv[0]))
-    return os.path.dirname(path)
-
-
-def CreateRecord(keys, values, dir, file, reqPrint=False):
+def CreateFile(keys, values, dir, file, reqPrint=True):
     df = {keys[0]:[values[0]]}
     for i in range(1,len(keys)):
         df[keys[i]] = [values[i]]
     df = pd.DataFrame(df)
     df = df[keys]
-
     if not os.path.exists(dir):
         os.mkdir(dir)
     df.to_csv(os.path.join(dir,file), index=False)
     if reqPrint:
         print(file+' created')
 
-    
-def AppendRecord(keys, values, dir, file, reqPrint=False):
-    df = {keys[0]:[values[0]]}
-    for i in range(1,len(keys)):
-        df[keys[i]] = [values[i]]
-    df = pd.DataFrame(df)
-    df = df[keys]
-    df.to_csv(os.path.join(dir,file), mode='a', header=False, index=False)
-    if reqPrint:
-        print(file+' updated')
-        
-        
-def RegisterIndex():
-    parentDir = GetParentDir()
-    refPath = os.path.join(parentDir, 'ref', 'params.csv')
-    indexPath = pd.read_csv(refPath).set_index('key')['value']['indexPath']
-    df = pd.read_csv(indexPath)
-    indexValue = round(df['index'][len(df)-1], 2)
-    indexTime = df['timestamp'][len(df)-1]
-    print ('Index value is '+str(indexValue)+' at '+str(indexTime))
-    
-    dir = os.path.dirname(refPath)
-    file = 'params.csv'
-    keys = ['key', 'value']
-    values = ['indexTime', indexTime]
-    AppendRecord(keys, values, dir, file, reqPrint=True)
-    values = ['indexValue', indexValue]
-    AppendRecord(keys, values, dir, file, reqPrint=True)
-    
 
-def LaunchIndexProgram():
-    parentDir = GetParentDir()
-    refPath = os.path.join(parentDir, 'ref', 'params.csv')
-    indexCodePath = pd.read_csv(refPath).set_index('key')['value']['indexCodePath']
-    os.system('python ' + indexCodePath)
+def CreateLogFile(timestamp, timeinfo, parentDir):
+    record = '[Initialize] Initialization is completed'
+    keys = ['timestamp', 'timeinfo', 'record']
+    values = [timestamp, timeinfo, record]
+    dir = os.path.join(parentDir, 'log')
+    file = 'log.csv'
+    CreateFile(keys, values, dir, file)
+    print(record)       
     
     
 def Initialize():
@@ -69,13 +37,9 @@ def Initialize():
     if os.path.exists(os.path.join(dir,file)):
         print(file + ' already exists')
     else:
-        ts = int(time.time())
-        readableTime = time.strftime('%Y-%m-%d_%H:%M:%S', time.localtime(ts))
-        record = 'Log.csv created'
-        keys = ['timestamp', 'datetime', 'record']
-        values = [ts, readableTime, record]
-        CreateRecord(keys, values, dir, file, reqPrint=True)
-        RegisterIndex()
+        timestamp = int(time.time())
+        timeinfo = time.strftime('%Y-%m-%d_%H:%M:%S', time.localtime(ts))
+        CreateLogFile(timestamp, timeinfo, parentDir)
 
 
 
