@@ -32,7 +32,8 @@ def CreateLogFile(timestamp, timeinfo, parentDir):
     
     
 def Initialize():
-    dir = os.path.join(GetParentDir(), 'log')
+    parentDir = GetParentDir()
+    dir = os.path.join(parentDir, 'log')
     file = 'log.csv'
     if os.path.exists(os.path.join(dir,file)):
         print('Initialization is skipped cause index.csv already exists')
