@@ -38,7 +38,7 @@ def Initialize():
         print('Initialization is skipped cause index.csv already exists')
     else:
         timestamp = int(time.time())
-        timeinfo = time.strftime('%Y-%m-%d_%H:%M:%S', time.localtime(ts))
+        timeinfo = time.strftime('%Y-%m-%d_%H:%M:%S', time.localtime(timestamp))
         CreateLogFile(timestamp, timeinfo, parentDir)
 
 
