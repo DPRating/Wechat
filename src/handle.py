@@ -9,7 +9,7 @@ import reply
 import receive
 import hashlib
 import pandas as pd
-from function import GetToken, GetDapao30
+from function import GetToken, GetDapao30Value, GetDapao30Doc
 
 
 class Handle(object):
@@ -41,11 +41,15 @@ class Handle(object):
             webData = web.data()
             recMsg = receive.parse_xml(webData)
             if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
+                toUser = recMsg.FromUserName
+                fromUser = recMsg.ToUserName
                 if recMsg.Content in ['大炮30', '大炮综指']:
-                    toUser = recMsg.FromUserName
-                    fromUser = recMsg.ToUserName
                     suffix = u'\n回复「大炮综指详情」\n可获取相关文章'.encode('utf-8')
-                    content = str(GetDapao30()) + suffix
+                    content = str(GetDapao30Value()) + suffix
+                    replyMsg = reply.TextMsg(toUser, fromUser, content)
+                    return replyMsg.send()
+                elif recMsg.Content in ['大炮30详情', '大炮综指详情']:
+                    content = GetDapao30Doc()
                     replyMsg = reply.TextMsg(toUser, fromUser, content)
                     return replyMsg.send()
                 else:
