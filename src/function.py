@@ -19,10 +19,8 @@ def GetToken():
     
 
 def GetDapao30():
-    print('GetDapao30 is called')
     paramPath = os.path.join(GetParentDir(), 'ref', 'param.json')
     with open(paramPath) as f:
         param = json.load(f)
-    print param['dapao30Value']
     return param['dapao30Value']
 
