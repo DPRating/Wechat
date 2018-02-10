@@ -49,7 +49,7 @@ class Handle(object):
                     replyMsg = reply.TextMsg(toUser, fromUser, content)
                     return replyMsg.send()
                 elif recMsg.Content in ['大炮30详情', '大炮综指详情']:
-                    content = GetDapao30Doc()
+                    content = str(GetDapao30Doc())
                     replyMsg = reply.TextMsg(toUser, fromUser, content)
                     return replyMsg.send()
                 else:
