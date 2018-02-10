@@ -35,7 +35,7 @@ def Initialize():
     dir = os.path.join(GetParentDir(), 'log')
     file = 'log.csv'
     if os.path.exists(os.path.join(dir,file)):
-        print(file + ' already exists')
+        print('Initialization is skipped cause index.csv already exists')
     else:
         timestamp = int(time.time())
         timeinfo = time.strftime('%Y-%m-%d_%H:%M:%S', time.localtime(ts))
