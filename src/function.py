@@ -5,6 +5,7 @@
 import os
 import sys
 import json
+import pandas as pd
 
 
 def GetParentDir():
@@ -13,21 +14,29 @@ def GetParentDir():
 
 
 def GetToken():
-    paramPath = os.path.join(GetParentDir(), 'ref', 'param.json')
-    with open(paramPath) as f:
+    path = os.path.join(GetParentDir(), 'ref', 'param.json')
+    with open(path) as f:
         param = json.load(f)
     
 
-def GetDapao30Value():
-    paramPath = os.path.join(GetParentDir(), 'ref', 'param.json')
-    with open(paramPath) as f:
-        param = json.load(f)
-    return param['dapao30Value']
+def GetDarpal30Value():
+    path = os.path.join(GetParentDir(), 'ref', 'index.csv')
+    df = pd.read_csv(path)
+    return df['value']['Darpal30']
 
 
-def GetDapao30Doc():
-    paramPath = os.path.join(GetParentDir(), 'ref', 'param.json')
-    with open(paramPath) as f:
-        param = json.load(f)
-    return param['dapao30Doc']
+def GetDarpal30Doc():
+    path = os.path.join(GetParentDir(), 'ref', 'index.csv')
+    df = pd.read_csv(path)
+    return df['doc']['Darpal30']
 
+def GetBvixValue():
+    path = os.path.join(GetParentDir(), 'ref', 'index.csv')
+    df = pd.read_csv(path)
+    return df['value']['BVIX']
+
+
+def GetBvixDoc():
+    path = os.path.join(GetParentDir(), 'ref', 'index.csv')
+    df = pd.read_csv(path)
+    return df['doc']['BVIX']
