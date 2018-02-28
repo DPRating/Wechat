@@ -21,22 +21,22 @@ def GetToken():
 
 def GetDarpal30Value():
     path = os.path.join(GetParentDir(), 'ref', 'index.csv')
-    df = pd.read_csv(path)
+    df = pd.read_csv(path).set_index('name')
     return df['value']['Darpal30']
 
 
 def GetDarpal30Doc():
     path = os.path.join(GetParentDir(), 'ref', 'index.csv')
-    df = pd.read_csv(path)
+    df = pd.read_csv(path).set_index('name')
     return df['doc']['Darpal30']
 
 def GetBvixValue():
     path = os.path.join(GetParentDir(), 'ref', 'index.csv')
-    df = pd.read_csv(path)
+    df = pd.read_csv(path).set_index('name')
     return df['value']['BVIX']
 
 
 def GetBvixDoc():
     path = os.path.join(GetParentDir(), 'ref', 'index.csv')
-    df = pd.read_csv(path)
+    df = pd.read_csv(path).set_index('name')
     return df['doc']['BVIX']
