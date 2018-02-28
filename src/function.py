@@ -17,6 +17,7 @@ def GetToken():
     path = os.path.join(GetParentDir(), 'ref', 'param.json')
     with open(path) as f:
         param = json.load(f)
+    return param['token']
     
 
 def GetDarpal30Value():
