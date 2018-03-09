@@ -43,14 +43,14 @@ class Handle(object):
             if isinstance(recMsg, receive.Msg) and recMsg.MsgType == 'text':
                 toUser = recMsg.FromUserName
                 fromUser = recMsg.ToUserName
-                if recMsg.Content in ['Darpal30', '大炮30', '大炮综指']:
+                if recMsg.Content in ['大炮综指', '大炮30', 'Darpal30']:
                     str1 = u'当前指数：'.encode('utf-8') + str(GetDarpal30Value())
                     str2 = u'\n大炮综指是由市值前30的数字货币按市值加权得到的指数，'.encode('utf-8')
                     str3 = u'可以反映出市场整体行情，想进一步了解可回复「大炮综指详情」'.encode('utf-8')
                     content = str1 + str2 + str3
                 elif recMsg.Content in ['大炮综指详情']:
                     content = str(GetDarpal30Doc())
-                elif recMsg.Content in ['Darpal20', '大炮20', '大炮精选']:
+                elif recMsg.Content in ['大炮精选', '大炮20', 'Darpal20']:
                     str1 = u'当前指数：'.encode('utf-8') + str(GetDarpal20Value())
                     str2 = u'\n大炮精选是根据我们的评级方法，'.encode('utf-8')
                     str3 = u'从市值较高的数字货币中精选出的20个标的构建的市场指数，'.encode('utf-8')
