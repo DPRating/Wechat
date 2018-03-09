@@ -31,13 +31,13 @@ def GetDarpal30Doc():
     df = pd.read_csv(path).set_index('name')
     return df['doc']['Darpal30']
 
-def GetBvixValue():
+def GetDarpal20Value():
     path = os.path.join(GetParentDir(), 'ref', 'index.csv')
     df = pd.read_csv(path).set_index('name')
-    return df['value']['BVIX']
+    return df['value']['Darpal20']
 
 
-def GetBvixDoc():
+def GetDarpal20Doc():
     path = os.path.join(GetParentDir(), 'ref', 'index.csv')
     df = pd.read_csv(path).set_index('name')
-    return df['doc']['BVIX']
+    return df['doc']['Darpal20']
